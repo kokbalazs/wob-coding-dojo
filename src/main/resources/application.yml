@@ -1,3 +1,16 @@
 spring:
+  main:
+    banner-mode: 'off'
   application:
-    name: Coding Dojo
+    name: '@project.name@'
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    username: test
+    password: test
+  batch:
+    jdbc:
+      initialize-schema: always
+
+logging:
+  level:
+    root: INFO
