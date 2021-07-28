@@ -4,9 +4,9 @@ spring:
   application:
     name: '@project.name@'
   datasource:
-    url: jdbc:postgresql://localhost:5432/
-    username: test
-    password: test
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: fosql
   batch:
     jdbc:
       initialize-schema: always

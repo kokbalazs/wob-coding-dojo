@@ -13,6 +13,7 @@ import org.springframework.core.io.FileSystemResource;
 public class LoadCsvToTableReaderConfiguration {
 	
 	public static final String CSV_PATH = "csv/feladat_1.csv";
+	public static final String TAB_DELIMITER = "\t";
 	
 	@Bean
 	public FlatFileItemReader<Person> loadCsvToTableReader() {
@@ -24,6 +25,7 @@ public class LoadCsvToTableReaderConfiguration {
 				setLineTokenizer(new DelimitedLineTokenizer() {
 					{
 						setNames("last_name", "first_name", "age");
+						setDelimiter(TAB_DELIMITER);
 					}
 				});
 				setFieldSetMapper(new BeanWrapperFieldSetMapper<>() {
