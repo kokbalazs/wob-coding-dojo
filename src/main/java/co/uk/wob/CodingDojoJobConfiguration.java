@@ -1,8 +1,7 @@
 package co.uk.wob;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -15,9 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableBatchProcessing
 @RequiredArgsConstructor
-public class JobConfiguration {
-	
-	protected final Logger logger = LoggerFactory.getLogger(JobConfiguration.class);
+@Slf4j
+public class CodingDojoJobConfiguration {
 	
 	@Value("${spring.application.name}")
 	private String applicationName;
@@ -26,7 +24,7 @@ public class JobConfiguration {
 	
 	@Bean
 	public Job csvLoaderJob() {
-		logger.info("Creating Job...");
+		log.info("Creating Job...");
 		return jobBuilderFactory
 				.get(applicationName)
 				.incrementer(new RunIdIncrementer())

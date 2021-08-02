@@ -1,0 +1,23 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    container_name: "dojo-postgres"
+    ports:
+      - "5433:5432"
+  flyway:
+    container_name: "dojo-flyway"
+    environment:
+      - FLYWAY_USER=postgres
+      - FLYWAY_PASSWORD=1234
+      - FLYWAY_URL=jdbc:postgresql://postgres:5432/postgres
+      - FLYWAY_GROUP=true
+    image: "flyway/flyway"
+    command: -locations=filesystem:/flyway/sql -connectRetries=60 migrate
+    volumes:
+      - ./flyway/sql:/flyway/sql
+    depends_on:
+      - postgres

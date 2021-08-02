@@ -1,4 +1,4 @@
-package co.uk.wob.processor;
+package co.uk.wob.loadcsvtotable.processor;
 
 import co.uk.wob.model.Person;
 import org.springframework.batch.item.ItemProcessor;

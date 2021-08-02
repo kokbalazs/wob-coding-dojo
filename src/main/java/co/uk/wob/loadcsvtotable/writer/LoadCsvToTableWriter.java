@@ -1,4 +1,4 @@
-package co.uk.wob.writer;
+package co.uk.wob.loadcsvtotable.writer;
 
 import co.uk.wob.model.Person;
 import co.uk.wob.repository.LoadCsvRepository;
@@ -15,9 +15,7 @@ public class LoadCsvToTableWriter implements ItemWriter<Person> {
 	private final LoadCsvRepository repository;
 	
 	@Override
-	public void write(List<? extends Person> list) {
-		for (Person p : list) {
-			repository.storePersonToDatabase(p);
-		}
+	public void write(List<? extends Person> personList) {
+		personList.forEach(repository::storePersonToDatabase);
 	}
 }
