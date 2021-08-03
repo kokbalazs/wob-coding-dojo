@@ -9,7 +9,7 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
 public class DumpTableStepConfiguration {
 	
@@ -17,7 +17,7 @@ public class DumpTableStepConfiguration {
 	private final ItemReader<Person> dumpTableItemReader;
 	private final ItemWriter<Person> dumpTableItemWriter;
 	
-//	@Bean
+	@Bean
 	public Step dumpTableStep() {
 		return stepBuilderFactory
 				.get("dumpTableStep")
@@ -27,6 +27,7 @@ public class DumpTableStepConfiguration {
 				.skip(Exception.class)
 				.reader(dumpTableItemReader)
 				.writer(dumpTableItemWriter)
+				.listener(dumpTableItemWriter)
 				.build();
 	}
 	

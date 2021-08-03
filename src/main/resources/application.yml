@@ -11,6 +11,9 @@ spring:
     jdbc:
       initialize-schema: always
 
+source-table: person_source
+target-table: person_target
+
 logging:
   level:
     root: INFO
