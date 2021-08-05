@@ -12,12 +12,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 
 @Configuration
-//@StepScope
 public class LoadCsvToTableReaderConfiguration {
 	
 	public String csvPath;
 	
 	@Bean
+	@StepScope
 	public FlatFileItemReader<Person> loadCsvToTableReader() {
 		return new FlatFileItemReaderBuilder<Person>()
 				.name("loadCsvToTableReader")

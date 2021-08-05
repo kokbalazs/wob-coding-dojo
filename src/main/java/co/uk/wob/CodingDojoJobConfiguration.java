@@ -20,6 +20,7 @@ public class CodingDojoJobConfiguration {
 	@Value("${spring.application.name}")
 	private String applicationName;
 	private final JobBuilderFactory jobBuilderFactory;
+	private final Step dumpTableStep;
 	private final Step loadCsvToTableStep;
 	
 	@Bean
@@ -28,7 +29,8 @@ public class CodingDojoJobConfiguration {
 		return jobBuilderFactory
 				.get(applicationName)
 				.incrementer(new RunIdIncrementer())
-				.start(loadCsvToTableStep)
+				.start(dumpTableStep)
+				.next(loadCsvToTableStep)
 				.build();
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -14,9 +15,10 @@ import org.springframework.core.io.FileSystemResource;
 import java.time.LocalDateTime;
 
 @Configuration
-@StepScope
 public class DumpTableWriterConfiguration {
 	
+	@Value("${file-save-location}")
+	private String fileLocation;
 	private String csvPath;
 	
 	@Bean
@@ -32,7 +34,7 @@ public class DumpTableWriterConfiguration {
 	}
 	
 	private String generateCsvPath() {
-		return "Persons_" + LocalDateTime.now() + ".csv";
+		return fileLocation + "Persons_" + LocalDateTime.now().toString().replace(":","_") + ".csv";
 	}
 	
 	private String[] getNames() {

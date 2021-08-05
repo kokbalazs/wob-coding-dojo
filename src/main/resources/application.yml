@@ -4,16 +4,17 @@ spring:
   application:
     name: '@project.name@'
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
-    password: fosql
+    password: 1234
   batch:
     jdbc:
       initialize-schema: always
 
 source-table: person_source
 target-table: person_target
+file-save-location: /tmp/Persons/
 
 logging:
   level:
-    root: INFO
+    root: DEBUG

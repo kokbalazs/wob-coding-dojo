@@ -1,8 +1,8 @@
 create table if not exists person_source
 (
     id  serial not null constraint person_source_pk PRIMARY KEY,
-    first_name varchar(200) not null,
     last_name  varchar(200) not null,
+    first_name varchar(200) not null,
     age        integer not null
 );
 
@@ -42,7 +42,7 @@ INSERT INTO person_source (last_name, first_name, age) VALUES ('Meg',' Győző',
 create table if not exists person_target
 (
     id  serial not null constraint person_target_pk PRIMARY KEY,
-    first_name varchar(200) not null,
     last_name  varchar(200) not null,
+    first_name varchar(200) not null,
     age        integer not null
-);
+    );

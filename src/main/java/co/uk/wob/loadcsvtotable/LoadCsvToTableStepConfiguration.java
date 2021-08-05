@@ -1,5 +1,6 @@
 package co.uk.wob.loadcsvtotable;
 
+import co.uk.wob.loadcsvtotable.reader.LoadCsvToTableReaderConfiguration;
 import co.uk.wob.model.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Step;
@@ -18,6 +19,7 @@ public class LoadCsvToTableStepConfiguration {
 	private final ItemReader<Person> loadCsvToTableReader;
 	private final ItemProcessor<Person, Person> loadCsvToTableProcessor;
 	private final ItemWriter<Person> loadCsvToTableWriter;
+	private final LoadCsvToTableReaderConfiguration readerConfiguration;
 	
 	@Bean
 	public Step loadCsvToTableStep() {
@@ -30,6 +32,7 @@ public class LoadCsvToTableStepConfiguration {
 				.reader(loadCsvToTableReader)
 				.processor(loadCsvToTableProcessor)
 				.writer(loadCsvToTableWriter)
+				.listener(readerConfiguration)
 				.build();
 	}
 	

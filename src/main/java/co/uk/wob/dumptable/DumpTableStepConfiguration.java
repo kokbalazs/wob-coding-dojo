@@ -1,5 +1,6 @@
 package co.uk.wob.dumptable;
 
+import co.uk.wob.dumptable.writer.DumpTableWriterConfiguration;
 import co.uk.wob.model.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Step;
@@ -16,6 +17,7 @@ public class DumpTableStepConfiguration {
 	private final StepBuilderFactory stepBuilderFactory;
 	private final ItemReader<Person> dumpTableItemReader;
 	private final ItemWriter<Person> dumpTableItemWriter;
+	private final DumpTableWriterConfiguration writerConfiguration;
 	
 	@Bean
 	public Step dumpTableStep() {
@@ -27,7 +29,7 @@ public class DumpTableStepConfiguration {
 				.skip(Exception.class)
 				.reader(dumpTableItemReader)
 				.writer(dumpTableItemWriter)
-				.listener(dumpTableItemWriter)
+				.listener(writerConfiguration)
 				.build();
 	}
 	

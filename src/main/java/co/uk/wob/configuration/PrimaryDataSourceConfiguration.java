@@ -1,4 +1,4 @@
-package co.uk.wob.repository;
+package co.uk.wob.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
