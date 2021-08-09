@@ -38,11 +38,3 @@ INSERT INTO person_source (last_name, first_name, age) VALUES ('Körm',' Ödön'
 INSERT INTO person_source (last_name, first_name, age) VALUES ('Kér',' Ede', 54);
 INSERT INTO person_source (last_name, first_name, age) VALUES ('Major',' Anna', 82);
 INSERT INTO person_source (last_name, first_name, age) VALUES ('Meg',' Győző', 26);
-
-create table if not exists person_target
-(
-    id  serial not null constraint person_target_pk PRIMARY KEY,
-    last_name  varchar(200) not null,
-    first_name varchar(200) not null,
-    age        integer not null
-    );

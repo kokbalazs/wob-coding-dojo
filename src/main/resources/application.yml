@@ -7,14 +7,24 @@ spring:
     url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
     password: 1234
+    initialize: false
   batch:
     jdbc:
       initialize-schema: always
+
+target:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: fosql
 
 source-table: person_source
 target-table: person_target
 file-save-location: /tmp/Persons/
 
+
+
 logging:
+  config: src/main/resources/logback-spring.xml
   level:
     root: DEBUG

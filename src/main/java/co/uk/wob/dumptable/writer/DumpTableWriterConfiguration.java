@@ -38,7 +38,7 @@ public class DumpTableWriterConfiguration {
 	}
 	
 	private String[] getNames() {
-		return new String[]{"last_name", "first_name", "age"};
+		return new String[]{"lastName", "firstName", "age"};
 	}
 	
 	
