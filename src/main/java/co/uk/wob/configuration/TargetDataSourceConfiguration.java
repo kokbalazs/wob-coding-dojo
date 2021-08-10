@@ -34,19 +34,19 @@ public class TargetDataSourceConfiguration {
 	
 	@Bean
 	@ConditionalOnBean(name = "targetDataSource")
-	public NamedParameterJdbcTemplate targetNamedParameterJdbcTemplate(DataSource targetDataSource) {
+	public NamedParameterJdbcTemplate targetNamedParameterJdbcTemplate(@Qualifier("targetDataSource") DataSource targetDataSource) {
 		return new NamedParameterJdbcTemplate(targetDataSource);
 	}
 	
 	@Bean
 	@ConditionalOnBean(name = "targetDataSource")
-	public PlatformTransactionManager targetPlatformTransactionManager(DataSource targetDataSource) {
+	public PlatformTransactionManager targetPlatformTransactionManager(@Qualifier("targetDataSource") DataSource targetDataSource) {
 		return new DataSourceTransactionManager(targetDataSource);
 	}
 	
 	@Bean
 	@ConditionalOnBean(name = "targetPlatformTransactionManager")
-	public TransactionTemplate targetTransactionTemplate(PlatformTransactionManager targetPlatformTransactionManager) {
+	public TransactionTemplate targetTransactionTemplate(@Qualifier("targetPlatformTransactionManager") PlatformTransactionManager targetPlatformTransactionManager) {
 		return new TransactionTemplate(targetPlatformTransactionManager);
 	}
 	

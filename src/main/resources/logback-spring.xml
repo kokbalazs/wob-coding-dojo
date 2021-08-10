@@ -1,15 +1,48 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <appender name="Console"
-              class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
-            </Pattern>
-        </layout>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
     </appender>
 
-    <root level="debug">
-        <appender-ref ref="Console" />
+    <springProperty scope="context" name="appName" source="spring.application.name"/>
+    <springProperty scope="context" name="logDir" source="log.dir"/>
+    <springProperty scope="context" name="fileNamePrefix" source="log.dir.filename.prefix"/>
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <if condition='isDefined("appName")'>
+            <then>
+
+                <if condition='isDefined("fileNamePrefix")'>
+                    <then>
+                        <file>${logDir}/${appName}/log/${fileNamePrefix}-${appName}.log</file>
+                    </then>
+                    <else>
+                        <file>${logDir}/${appName}/log/${appName}.log</file>
+                    </else>
+                </if>
+
+                <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                    <if condition='isDefined("fileNamePrefix")'>
+                        <then>
+                            <fileNamePattern>${logDir}/${appName}/log/${fileNamePrefix}-${appName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                        </then>
+                        <else>
+                            <fileNamePattern>${logDir}/${appName}/log/${appName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                        </else>
+                    </if>
+                    <maxFileSize>10MB</maxFileSize>
+                </rollingPolicy>
+
+                <encoder>
+                    <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+                </encoder>
+            </then>
+        </if>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="FILE-ROLLING"/>
     </root>
 </configuration>
