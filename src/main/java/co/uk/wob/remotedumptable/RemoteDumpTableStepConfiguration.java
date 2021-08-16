@@ -1,6 +1,6 @@
-package co.uk.wob.dumptable;
+package co.uk.wob.remotedumptable;
 
-import co.uk.wob.dumptable.writer.DumpTableWriterConfiguration;
+import co.uk.wob.remotedumptable.writer.RemoteDumpTableWriterConfiguration;
 import co.uk.wob.model.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Step;
@@ -12,17 +12,17 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class DumpTableStepConfiguration {
+public class RemoteDumpTableStepConfiguration {
 	
 	private final StepBuilderFactory stepBuilderFactory;
 	private final ItemReader<Person> dumpTableItemReader;
 	private final ItemWriter<Person> dumpTableItemWriter;
-	private final DumpTableWriterConfiguration writerConfiguration;
+	private final RemoteDumpTableWriterConfiguration writerConfiguration;
 	
 	@Bean
-	public Step dumpTableStep() {
+	public Step remoteDumpTableStep() {
 		return stepBuilderFactory
-				.get("dumpTableStep")
+				.get("remoteDumpTableStep")
 				.<Person, Person>chunk(100)
 				.faultTolerant()
 				.skipLimit(3)

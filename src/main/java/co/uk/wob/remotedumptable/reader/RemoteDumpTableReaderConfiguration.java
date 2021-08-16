@@ -1,8 +1,7 @@
-package co.uk.wob.dumptable.reader;
+package co.uk.wob.remotedumptable.reader;
 
 import co.uk.wob.model.Person;
 import com.zaxxer.hikari.HikariDataSource;
-import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.Order;
 import org.springframework.batch.item.database.builder.JdbcPagingItemReaderBuilder;
@@ -15,22 +14,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@RequiredArgsConstructor
-public class DumpTableReaderConfiguration {
+public class RemoteDumpTableReaderConfiguration {
 	
-	public final HikariDataSource dataSource;
+	private static final int DEFAULT_FETCH_SIZE = 100;
 	@Value("${source-table}")
 	private String sourceTable;
 	
 	@Bean
-	public ItemReader<Person> dumpTableItemReader() {
+	public ItemReader<Person> dumpTableItemReader(HikariDataSource dataSource) {
 		return new JdbcPagingItemReaderBuilder<Person>()
 				.name("dumpTableItemReader")
 				.dataSource(dataSource)
 				.selectClause("first_name, last_name, age")
 				.fromClause(sourceTable)
-				.fetchSize(100)
-				.pageSize(100)
+				.fetchSize(DEFAULT_FETCH_SIZE)
+				.pageSize(DEFAULT_FETCH_SIZE)
 				.sortKeys(getSortKeys())
 				.rowMapper(BeanPropertyRowMapper.newInstance(Person.class))
 				.build();

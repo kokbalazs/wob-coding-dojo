@@ -1,9 +1,8 @@
-package co.uk.wob.dumptable.writer;
+package co.uk.wob.remotedumptable.writer;
 
 import co.uk.wob.model.Person;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.AfterStep;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
@@ -15,7 +14,7 @@ import org.springframework.core.io.FileSystemResource;
 import java.time.LocalDateTime;
 
 @Configuration
-public class DumpTableWriterConfiguration {
+public class RemoteDumpTableWriterConfiguration {
 	
 	@Value("${file-save-location}")
 	private String fileLocation;

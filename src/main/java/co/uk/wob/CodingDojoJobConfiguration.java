@@ -20,8 +20,10 @@ public class CodingDojoJobConfiguration {
 	@Value("${spring.application.name}")
 	private String applicationName;
 	private final JobBuilderFactory jobBuilderFactory;
-	private final Step dumpTableStep;
-	private final Step loadCsvToTableStep;
+	private final Step remoteDumpTableStep;
+	private final Step remoteLoadStep;
+//	private final Step dumpTableStep;
+//	private final Step loadCsvToTableStep;
 	
 	@Bean
 	public Job csvLoaderJob() {
@@ -29,8 +31,10 @@ public class CodingDojoJobConfiguration {
 		return jobBuilderFactory
 				.get(applicationName)
 				.incrementer(new RunIdIncrementer())
-				.start(dumpTableStep)
-				.next(loadCsvToTableStep)
+				.start(remoteDumpTableStep)
+				.next(remoteLoadStep)
+//				.next(dumpTableStep)
+//				.next(loadCsvToTableStep)
 				.build();
 	}
 	
