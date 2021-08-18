@@ -1,6 +1,8 @@
 package co.uk.wob.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.postgresql.PGConnection;
+import org.postgresql.copy.CopyManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -13,6 +15,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 @Configuration
 public class TargetDataSourceConfiguration {
@@ -48,6 +52,14 @@ public class TargetDataSourceConfiguration {
 	@ConditionalOnBean(name = "targetPlatformTransactionManager")
 	public TransactionTemplate targetTransactionTemplate(@Qualifier("targetPlatformTransactionManager") PlatformTransactionManager targetPlatformTransactionManager) {
 		return new TransactionTemplate(targetPlatformTransactionManager);
+	}
+	
+	@Bean
+	@ConditionalOnBean(name = "targetDataSource")
+	public CopyManager copyManager(@Qualifier("targetDataSource") HikariDataSource dataSource) throws SQLException {
+		Connection conn = dataSource.getConnection();
+		PGConnection pgConnection = conn.unwrap(PGConnection.class);
+		return pgConnection.getCopyAPI();
 	}
 	
 }

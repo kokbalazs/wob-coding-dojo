@@ -20,6 +20,7 @@ target:
 
 source-table: person_source
 target-table: person_target
+final-target-table: person_final_target
 file-save-location: /tmp/Persons/
 
 logging:

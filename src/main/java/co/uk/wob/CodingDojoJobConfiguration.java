@@ -22,8 +22,8 @@ public class CodingDojoJobConfiguration {
 	private final JobBuilderFactory jobBuilderFactory;
 	private final Step remoteDumpTableStep;
 	private final Step remoteLoadStep;
-//	private final Step dumpTableStep;
-//	private final Step loadCsvToTableStep;
+	private final Step targetDumpTableStep;
+	private final Step loadCsvToTableStep;
 	
 	@Bean
 	public Job csvLoaderJob() {
@@ -33,8 +33,8 @@ public class CodingDojoJobConfiguration {
 				.incrementer(new RunIdIncrementer())
 				.start(remoteDumpTableStep)
 				.next(remoteLoadStep)
-//				.next(dumpTableStep)
-//				.next(loadCsvToTableStep)
+				.next(targetDumpTableStep)
+				.next(loadCsvToTableStep)
 				.build();
 	}
 	

@@ -30,7 +30,6 @@ public class PrimaryDataSourceConfiguration {
 		return dataSourceProperties
 				.initializeDataSourceBuilder()
 				.type(HikariDataSource.class)
-				.driverClassName("org.postgresql.ds.PGSimpleDataSource")
 				.build();
 	}
 	
