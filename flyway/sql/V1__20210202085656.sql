@@ -1,8 +1,8 @@
 create table if not exists person_source
 (
     id  serial not null constraint person_source_pk PRIMARY KEY,
-    last_name  varchar(200) not null,
-    first_name varchar(200) not null,
+    last_name  text not null,
+    first_name text not null,
     age        integer not null
 );
 

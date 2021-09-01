@@ -12,6 +12,10 @@ spring:
     jdbc:
       initialize-schema: always
 
+endpoint:
+  name: mockarooendpoint
+  url: https://my.api.mockaroo.com
+
 target:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres

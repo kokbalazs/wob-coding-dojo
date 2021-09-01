@@ -24,6 +24,8 @@ public class CodingDojoJobConfiguration {
 	private final Step remoteLoadStep;
 	private final Step targetDumpTableStep;
 	private final Step loadCsvToTableStep;
+	private final Step listingEndpointStep;
+	private final Step marketplaceEndpointStep;
 	
 	@Bean
 	public Job csvLoaderJob() {
@@ -35,6 +37,8 @@ public class CodingDojoJobConfiguration {
 				.next(remoteLoadStep)
 				.next(targetDumpTableStep)
 				.next(loadCsvToTableStep)
+				.next(listingEndpointStep)
+				.next(marketplaceEndpointStep)
 				.build();
 	}
 	
