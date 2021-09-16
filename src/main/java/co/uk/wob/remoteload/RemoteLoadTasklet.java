@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Random;
 
 import static co.uk.wob.common.CustomExitStatus.FTP_ALLOWED;
 
@@ -26,6 +25,7 @@ public class RemoteLoadTasklet implements Tasklet {
 	
 	private String csvPath;
 	private final RemoteDumpRepository remoteDumpRepository;
+	protected RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 	
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws SQLException, IOException {
@@ -43,17 +43,13 @@ public class RemoteLoadTasklet implements Tasklet {
 	
 	@AfterStep
 	public ExitStatus afterStep(StepExecution stepExecution) {
-		int number = generateRandomNumber();
+		int number = randomNumberGenerator.generateRandomNumber();
 		log.info("Random number was {}.", number);
 		if (number >= 5) {
 			return FTP_ALLOWED;
 		}
 		
 		return ExitStatus.COMPLETED;
-	}
-	
-	private int generateRandomNumber() {
-		return new Random().nextInt(10) + 1;
 	}
 	
 }

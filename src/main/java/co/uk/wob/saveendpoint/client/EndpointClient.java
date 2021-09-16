@@ -16,6 +16,6 @@ public interface EndpointClient {
 	List<ListingStatusResponse> listingStatus();
 	
 	@GetMapping(value = "/marketplace?key=63304c70")
-	List<MarketplaceResponse>  marketplace();
+	List<MarketplaceResponse> marketplace();
 	
 }

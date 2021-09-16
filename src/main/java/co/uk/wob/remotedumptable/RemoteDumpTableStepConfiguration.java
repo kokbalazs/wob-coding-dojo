@@ -1,7 +1,7 @@
 package co.uk.wob.remotedumptable;
 
-import co.uk.wob.remotedumptable.writer.RemoteDumpTableWriterConfiguration;
 import co.uk.wob.model.Person;
+import co.uk.wob.remotedumptable.writer.RemoteDumpTableWriterConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;

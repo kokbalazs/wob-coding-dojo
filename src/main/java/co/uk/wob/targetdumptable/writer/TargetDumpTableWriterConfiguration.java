@@ -33,7 +33,7 @@ public class TargetDumpTableWriterConfiguration {
 	}
 	
 	private String generateCsvPath() {
-		return fileLocation + "Persons_" + LocalDateTime.now().toString().replace(":","_") + ".csv";
+		return fileLocation + "Persons_" + LocalDateTime.now().toString().replace(":", "_") + ".csv";
 	}
 	
 	private String[] getNames() {
@@ -48,5 +48,5 @@ public class TargetDumpTableWriterConfiguration {
 				.getExecutionContext()
 				.put("targetCsvPath", csvPath);
 	}
-
+	
 }

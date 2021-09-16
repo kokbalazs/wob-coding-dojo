@@ -40,5 +40,5 @@ public class TargetDumpTableReaderConfiguration {
 		sortMap.put("first_name", Order.ASCENDING);
 		return sortMap;
 	}
-
+	
 }

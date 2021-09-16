@@ -3,7 +3,7 @@ package co.uk.wob.loadcsvtotable.processor;
 import co.uk.wob.model.Person;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoadCsvToTableProcessorTest {
 	
@@ -18,5 +18,5 @@ class LoadCsvToTableProcessorTest {
 		assert newPerson != null;
 		assertEquals("tset__test", newPerson.getFirstName());
 	}
-
+	
 }

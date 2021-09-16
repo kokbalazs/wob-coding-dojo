@@ -33,7 +33,7 @@ public class RemoteDumpTableWriterConfiguration {
 	}
 	
 	private String generateCsvPath() {
-		return fileLocation + "Persons_" + LocalDateTime.now().toString().replace(":","_") + ".csv";
+		return fileLocation + "Persons_" + LocalDateTime.now().toString().replace(":", "_") + ".csv";
 	}
 	
 	private String[] getNames() {

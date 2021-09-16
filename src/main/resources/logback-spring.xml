@@ -25,7 +25,9 @@
                 <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
                     <if condition='isDefined("fileNamePrefix")'>
                         <then>
-                            <fileNamePattern>${logDir}/${appName}/log/${fileNamePrefix}-${appName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                            <fileNamePattern>
+                                ${logDir}/${appName}/log/${fileNamePrefix}-${appName}.%d{yyyy-MM-dd}.%i.log
+                            </fileNamePattern>
                         </then>
                         <else>
                             <fileNamePattern>${logDir}/${appName}/log/${appName}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
