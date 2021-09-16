@@ -3,7 +3,6 @@ package co.uk.wob.repository;
 import co.uk.wob.saveendpoint.client.response.ListingStatusResponse;
 import co.uk.wob.saveendpoint.client.response.MarketplaceResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;

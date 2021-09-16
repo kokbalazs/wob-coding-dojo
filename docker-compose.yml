@@ -13,7 +13,7 @@ services:
     environment:
       - FLYWAY_USER=postgres
       - FLYWAY_PASSWORD=1234
-      - FLYWAY_URL=jdbc:postgresql://postgres:5432/postgres
+      - FLYWAY_URL=jdbc:postgresql://postgres:5433/postgres
       - FLYWAY_GROUP=true
     image: "flyway/flyway"
     command: -locations=filesystem:/flyway/sql -connectRetries=60 migrate
@@ -21,3 +21,18 @@ services:
       - ./flyway/sql:/flyway/sql
     depends_on:
       - postgres
+  ftpd-server:
+    image: stilliard/pure-ftpd
+    container_name: pure-ftpd
+    ports:
+      - "9021:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      - "./ftp/data:/home/balazs/"
+      - "./ftp/passwd:/etc/pure-ftpd/passwd"
+    environment:
+      PUBLICHOST: "localhost"
+      FTP_USER_NAME: "balazs"
+      FTP_USER_PASS: "1234"
+      FTP_USER_HOME: "/home/balazs"
+    restart: always

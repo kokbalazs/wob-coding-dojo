@@ -1,4 +1,4 @@
-package co.uk.wob.configuration;
+package co.uk.wob.configuration.database;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.postgresql.PGConnection;

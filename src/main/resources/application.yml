@@ -27,6 +27,13 @@ target-table: person_target
 final-target-table: person_final_target
 file-save-location: /tmp/Persons/
 
+ftp:
+  hostname: localhost
+  port: 9021
+  username: balazs
+  password: 1234
+  file-path: ftp.txt
+
 logging:
   config: src/main/resources/logback-spring.xml
   level:
