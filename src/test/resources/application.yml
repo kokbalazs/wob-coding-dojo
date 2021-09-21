@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: "@project.name@"
+  batch:
+    job:
+      enabled: false
+  datasource:
+    url: jdbc:mysql://localhost:3307/worldofbooks
+    username: root
+    password: password
