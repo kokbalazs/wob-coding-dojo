@@ -8,3 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3307/worldofbooks
     username: root
     password: password
+
+endpoint:
+  name: mockarooendpoint
+  url: http://localhost:9561

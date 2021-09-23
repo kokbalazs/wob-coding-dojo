@@ -7,7 +7,6 @@ import org.springframework.context.ApplicationContext;
 
 
 @SpringBootApplication
-@EnableFeignClients
 public class CodingDojoApplication {
 	
 	public static void main(String[] args) {

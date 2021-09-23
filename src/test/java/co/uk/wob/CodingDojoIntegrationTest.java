@@ -1,56 +1,68 @@
 package co.uk.wob;
 
 import co.uk.wob.configuration.CustomBatchConfigurer;
-import co.uk.wob.configuration.IntegrationTestActiveProfilesResolver;
 import co.uk.wob.configuration.JobLauncherConfiguration;
 import co.uk.wob.repository.RemoteTestRepository;
-import org.checkerframework.checker.units.qual.A;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.batch.core.BatchStatus;
-import org.springframework.batch.core.ExitStatus;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.*;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.batch.test.JobLauncherTestUtils;
+import org.springframework.batch.test.JobRepositoryTestUtils;
+import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles(resolver = IntegrationTestActiveProfilesResolver.class)
-@SpringBootTest(classes = CustomBatchConfigurer.class)
-@DirtiesContext
-@ContextConfiguration(classes = {CodingDojoApplication.class, CodingDojoJobConfiguration.class, JobLauncherConfiguration.class},
-		initializers = ConfigFileApplicationContextInitializer.class)
+@SpringBatchTest
+@EnableAutoConfiguration
+@ContextConfiguration(classes = {CustomBatchConfigurer.class, CodingDojoJobConfiguration.class, CodingDojoApplication.class})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class CodingDojoIntegrationTest {
-	
-	@MockBean
-	@Qualifier("ftpUploaderTasklet")
-	private Tasklet ftpUploaderTasklet;
+//
+//	@MockBean
+//	@Qualifier("ftpUploaderTasklet")
+//	private Tasklet ftpUploaderTasklet;
 	
 	@Autowired
 	private JobLauncherTestUtils jobLauncherTestUtils;
 	
 	@Autowired
-	private RemoteTestRepository repository;
+	private JobRepositoryTestUtils jobRepositoryTestUtils;
 	
-	@Before
-	public void init() throws Exception {
-		when(ftpUploaderTasklet.execute(any(), any())).thenReturn(RepeatStatus.FINISHED);
+	@After
+	public void cleanUp() {
+		jobRepositoryTestUtils.removeJobExecutions();
 	}
+	
+	private JobParameters defaultJobParameters() {
+		JobParametersBuilder paramsBuilder = new JobParametersBuilder();
+		paramsBuilder.addString("file.input", "TEST_INPUT");
+		paramsBuilder.addString("file.output", "TEST_OUTPUT");
+		return paramsBuilder.toJobParameters();
+	}
+	
+	
+//	@Before
+//	public void init() throws Exception {
+//		when(ftpUploaderTasklet.execute(any(), any())).thenReturn(RepeatStatus.FINISHED);
+//	}
 	
 	@Test
 	public void codingDojoIntegrationTest() throws Exception {
