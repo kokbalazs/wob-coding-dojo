@@ -1,7 +1,7 @@
 package co.uk.wob.saveendpoint.client;
 
-import co.uk.wob.saveendpoint.client.response.ListingStatusResponse;
-import co.uk.wob.saveendpoint.client.response.MarketplaceResponse;
+import co.uk.wob.client.response.ListingStatusResponse;
+import co.uk.wob.client.response.MarketplaceResponse;
 import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
