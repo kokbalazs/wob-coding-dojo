@@ -12,6 +12,8 @@ spring:
     jdbc:
       initialize-schema: always
 
+thread-count: 5
+
 endpoint:
   name: mockarooendpoint
   url: https://my.api.mockaroo.com
